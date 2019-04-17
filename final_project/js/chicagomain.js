@@ -1,5 +1,5 @@
 var data = chicagoTracts;
-var map = L.map('map').setView([41.835954, -87.630993], 10);
+var map = L.map('map').setView([41.840276, -87.684202], 11);
 
 	map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
 	
