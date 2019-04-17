@@ -9,7 +9,7 @@ map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 	
 
 // control that shows state info on hover
-var info = L.control();
+var info = L.control({position:'bottomright'});
 
 	info.onAdd = function (map) {
 		this._div = L.DomUtil.create('div', 'info');
@@ -63,11 +63,11 @@ var nhSearch = new L.Control.Search({
 	map.addLayer(chicagoNHjson);
 	map.addLayer(tractjson);
 	
-var legend = L.control({position: 'bottomright'});
+var legend = L.control({position: 'bottomleft'});
 
 	legend.onAdd = function (map) {
 
-var div = L.DomUtil.create('div', 'info legend'),
+var legdiv = L.DomUtil.create('div', 'info legend'),
 			grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
 			labels = [],
 			from, to;
@@ -76,12 +76,12 @@ var div = L.DomUtil.create('div', 'info legend'),
 			from = grades[i];
 			to = grades[i + 1]-1;
 			labels.push(
-				'<i style="background:' + getColor(from + 1) + '"></i> ' +
+				'<i style="background:' + getColorBach(from + 1) + '"></i> ' +
 				from + (to ? '%'+'&ndash;' + to + '%' : '%'));
 		}
 
-	div.innerHTML = labels.join('<br>');
-		return div;
+	legdiv.innerHTML = labels.join('<br>');
+		return legdiv;
 	};
 	
 	legend.addTo(map);
@@ -89,25 +89,25 @@ var div = L.DomUtil.create('div', 'info legend'),
 var attDD = L.control({position: 'topright'});
 	attDD.onAdd = function (map) {
 		
-var div = L.DomUtil.create('div', 'info attDD');
-    div.innerHTML = '<h4>Select Attribute</h4><select id="attOpt"><option value = "Bach">Bachelors Degree Percent</option><option value = "Home">Average Home Value</option><option value = "Income">Average Income</option></select>';
-    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-		return div;
+var attdiv = L.DomUtil.create('div', 'info attDD');
+    attdiv.innerHTML = '<h4>Select Attribute</h4><select id="attOpt"><option value = "Bach">Bachelors Degree Percent</option><option value = "Home">Average Home Value</option><option value = "Income">Average Income</option></select>';
+    attdiv.firstChild.onmousedown = attdiv.firstChild.ondblclick = L.DomEvent.stopPropagation;
+		return attdiv;
 		};
 	attDD.addTo(map);
 	
 var yearDD = L.control({position: 'topright'});
 		yearDD.onAdd = function (map) {
-var div = L.DomUtil.create('div', 'info yearDD');
-	div.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "Change">Change</option></select>';
-	div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-		return div;
+var yeardiv = L.DomUtil.create('div', 'info yearDD');
+	yeardiv.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "Change">Change</option></select>';
+	yeardiv.firstChild.onmousedown = yeardiv.firstChild.ondblclick = L.DomEvent.stopPropagation;
+		return yeardiv;
 	};
 	yearDD.addTo(map);
 
 //Create Functions
 // get color depending on population density value
-function getColor(d) {
+function getColorBach(d) {
 		return  d >= 100 ? '#BF0F00' :
 				d > 90  ? '#BF065B' :
 				d > 80  ? '#C00DBF' :
@@ -120,6 +120,21 @@ function getColor(d) {
 				d > 10  ? '#A4C43D' :
 				'#C59E44';
 	}
+	
+function getColorBachChange(d) {
+	return  d > 35  ? '#BF0F00' :
+			d > 30  ? '#C00DBF' :
+			d > 25  ? '#6413C0' :
+			d > 20  ? '#1A27C1' :
+			d > 15  ? '#2183C2' :
+			d > 10  ? '#28C2AB' :
+			d > 5   ? '#2FC35D' :
+			d > 0  	? '#56C336' :
+			d > -10 ? '#A4C43D' :
+			'#C59E44';
+	}
+	
+	
 //Styles for tracts
 function tractstyle(feature) {
 		return {
@@ -128,7 +143,7 @@ function tractstyle(feature) {
 			color: 'white',
 			dashArray: '3',
 			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties[attyear])
+			fillColor: getColorBach(feature.properties[attyear])
 		};
 	}
 //Style for Neighborhoods
@@ -172,15 +187,58 @@ function onEachFeature(feature, layer) {
 		});
 	}
 	
-function updateMap(map,attribute){
-	yearSel = attribute;
+function updateMap(map,att,year){
+	yearSel = year;
+	attSel = att;
 	attyear = attSel + yearSel;
 	var findLayers = new L.layerGroup();
 	map.eachLayer(function(layer){
 		findLayers.addLayer(layer);
 		if(layer.feature && layer.feature.properties[attyear]){
 			var props = layer.feature.properties;
-			var color = getColor(props[attyear]);
+			if(attSel == 'Bach'){
+			legend.onAdd = function (map) {
+				var legdiv = L.DomUtil.create('div', 'info legend'),
+					grades = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+					labels = [],
+					from, to;
+
+				for (var i = 0; i < grades.length; i++) {
+					from = grades[i];
+					to = grades[i + 1]-1;
+					labels.push(
+						'<i style="background:' + getColorBach(from + 1) + '"></i> ' +
+						 from + (to ? '%'+'&ndash;' + to + '%' : '%'));
+					}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					
+				var color = getColorBach(props[attyear]);
+				if(yearSel == 'Change'){
+						legend.onAdd = function (map) {
+							var legdiv = L.DomUtil.create('div', 'info legend'),
+								grades = [-10, 0, 5, 10, 15, 20, 25, 30, 35],
+								labels = [],
+								from, to;
+
+							for (var i = 0; i < grades.length; i++) {
+								from = grades[i];
+								to = grades[i + 1]-1;
+								labels.push(
+								'<i style="background:' + getColorBachChange(from + 1) + '"></i> ' +
+								from + (to ? '%'+'&ndash;' + to + '%' : '%+'));
+						}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					var color = getColorBachChange(props[attyear]);
+				}
+				legend.remove();
+				legend.addTo(map);
+				}
 			var options = {
 					weight: 2,
 					opacity: 1,
@@ -205,7 +263,7 @@ function updateMap(map,attribute){
 $('#yearOpt').change(function(){
 		yearID = document.getElementById('yearOpt');
 		yearVal = yearID.options[yearID.selectedIndex].value;
-		updateMap(map,yearVal);
+		updateMap(map,attSel,yearVal);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
 		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
