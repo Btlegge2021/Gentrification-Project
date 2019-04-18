@@ -106,7 +106,7 @@ var yeardiv = L.DomUtil.create('div', 'info yearDD');
 	yearDD.addTo(map);
 
 //Create Functions
-// get color depending on population density value
+//Color functions
 function getColorBach(d) {
 		return  d >= 100 ? '#BF0F00' :
 				d > 90  ? '#BF065B' :
@@ -134,16 +134,50 @@ function getColorBachChange(d) {
 			'#C59E44';
 	}
 	
+function getColorHome (d) {
+	return  d > 914500  ? '#BF0F00' :
+			d > 568500  ? '#BF065B' :
+			d > 430200  ? '#C00DBF' :
+			d > 355300  ? '#6413C0' :
+			d > 292700  ? '#1A27C1' :
+			d > 248500  ? '#2183C2' :
+			d > 212900  ? '#28C2AB' :
+			d > 176200  ? '#2FC35D' :
+			d > 141500  ? '#56C336' :
+			d > 104700  ? '#A4C43D' :
+			'#C59E44';
+	}
 	
-//Styles for tracts
+function getColorHChange(d) {
+	return  d > 290900  ? '#BF0F00' :
+			d > 143600  ? '#C00DBF' :
+			d > 61700  ? '#6413C0' :
+			d > 15600  ? '#1A27C1' :
+			d > -17400  ? '#2183C2' :
+			d > -45000  ? '#28C2AB' :
+			d > -74600   ? '#2FC35D' :
+			d > -111500  	? '#56C336' :
+			d > -162700 ? '#A4C43D' :
+			'#C59E44';
+	}
+	
+//Styles for tracts initialized with Bachelors stats
 function tractstyle(feature) {
+		if(attSel == 'Bach'){
+			var color = getColorBach(feature.properties[attyear])
+			if(yearSel == 'Change'){
+				var color = getColorBachChange(feature.properties[attyear])}}
+		if(attSel == 'Home'){
+			var color = getColorHome(feature.properties[attyear])
+			if(yearSel == 'Change'){
+				var color = getColorHChange(feature.properties[attyear])}}
 		return {
 			weight: 2,
 			opacity: 1,
 			color: 'white',
 			dashArray: '3',
 			fillOpacity: 0.7,
-			fillColor: getColorBach(feature.properties[attyear])
+			fillColor: color
 		};
 	}
 //Style for Neighborhoods
@@ -172,6 +206,7 @@ function highlightFeature(e) {
 
 function resetHighlight(e) {
 		tractjson.resetStyle(e.target);
+		//console.log(e.target);
 		info.update();
 	}
 
@@ -228,17 +263,60 @@ function updateMap(map,att,year){
 								to = grades[i + 1]-1;
 								labels.push(
 								'<i style="background:' + getColorBachChange(from + 1) + '"></i> ' +
-								from + (to ? '%'+'&ndash;' + to + '%' : '%+'));
+								from + (to ? '%'+'&ndash; ' + to + '%' : '%+'));
 						}
 
 					legdiv.innerHTML = labels.join('<br>');
 					return legdiv;
 					};
 					var color = getColorBachChange(props[attyear]);
-				}
+				}}
+				
+				if(attSel == 'Home'){
+					legend.onAdd = function (map) {
+				var legdiv = L.DomUtil.create('div', 'info legend'),
+					grades = [0,104700, 141500, 176200, 212900, 248500, 292700, 355300, 430200, 568500, 914500],
+					labels = [],
+					from, to;
+
+				for (var i = 0; i < grades.length; i++) {
+					from = grades[i];
+					to = grades[i + 1]-1;
+					labels.push(
+						'<i style="background:' + getColorHome(from + 1) + '"></i> ' +
+						 from + (to ? '&ndash;' + to : '+'));
+					}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					
+				var color = getColorHome(props[attyear]);
+				if(yearSel == 'Change'){
+						legend.onAdd = function (map) {
+							var legdiv = L.DomUtil.create('div', 'info legend'),
+								grades = [-162700, -111500, -74600, -45000, -17400, 15600, 61700, 143600, 290900],
+								labels = [],
+								from, to;
+
+							for (var i = 0; i < grades.length; i++) {
+								from = grades[i];
+								to = grades[i + 1]-1;
+								labels.push(
+									'<i style="background:' + getColorHChange(from + 1) + '"></i> ' +
+									from + (to ? '&ndash; ' + to : '+'));
+						}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					var color = getColorHChange(props[attyear]);
+				}}
+				
+				
+				
 				legend.remove();
 				legend.addTo(map);
-				}
 			var options = {
 					weight: 2,
 					opacity: 1,
@@ -270,4 +348,37 @@ $('#yearOpt').change(function(){
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
 			: 'Hover over a state');
 		};}
+		
+		if(attSel == 'Home'){
+			info.update = function (props) {
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
+			: 'Hover over a state');
+		};}
+		info.remove();
+		info.addTo(map);
 	})
+
+$('#attOpt').change(function(){
+		attID = document.getElementById('attOpt');
+		attVal = attID.options[attID.selectedIndex].value;
+		updateMap(map,attVal,yearSel);
+		if(attSel == 'Bach'){
+			info.update = function (props) {
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
+			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
+			: 'Hover over a state');
+		};}
+		
+		if(attSel == 'Home'){
+			info.update = function (props) {
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
+			: 'Hover over a state');
+		};}
+		info.remove();
+		info.addTo(map)
+		
+	})
+
+	
