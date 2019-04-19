@@ -149,18 +149,44 @@ function getColorHome (d) {
 	}
 	
 function getColorHChange(d) {
-	return  d > 290900  ? '#BF0F00' :
-			d > 143600  ? '#C00DBF' :
-			d > 61700  ? '#6413C0' :
-			d > 15600  ? '#1A27C1' :
-			d > -17400  ? '#2183C2' :
-			d > -45000  ? '#28C2AB' :
+	return  d > 290900   ? '#BF0F00' :
+			d > 143600   ? '#C00DBF' :
+			d > 61700    ? '#6413C0' :
+			d > 15600    ? '#1A27C1' :
+			d > -17400   ? '#2183C2' :
+			d > -45000   ? '#28C2AB' :
 			d > -74600   ? '#2FC35D' :
-			d > -111500  	? '#56C336' :
-			d > -162700 ? '#A4C43D' :
+			d > -111500  ? '#56C336' :
+			d > -162700  ? '#A4C43D' :
 			'#C59E44';
 	}
 	
+function getColorIncome (d) {
+	return  d > 160833  ? '#BF0F00' :
+			d > 146212  ? '#BF065B' :
+			d > 131591  ? '#C00DBF' :
+			d > 116969  ? '#6413C0' :
+			d > 102348  ? '#1A27C1' :
+			d > 87727   ? '#2183C2' :
+			d > 73106   ? '#28C2AB' :
+			d > 58485   ? '#2FC35D' :
+			d > 43864   ? '#56C336' :
+			d > 14621   ? '#A4C43D' :
+			'#C59E44';
+	}
+	
+function getColorIChange(d) {
+	return  d > 82381  ? '#BF0F00' :
+			d > 40619  ? '#C00DBF' :
+			d > 27111  ? '#6413C0' :
+			d > 17213  ? '#1A27C1' :
+			d > 9921   ? '#2183C2' :
+			d > 4314   ? '#28C2AB' :
+			d > -488   ? '#2FC35D' :
+			d > -5787  ? '#56C336' :
+			d > -13461 ? '#A4C43D' :
+			'#C59E44';
+	}
 //Styles for tracts initialized with Bachelors stats
 function tractstyle(feature) {
 		if(attSel == 'Bach'){
@@ -171,6 +197,10 @@ function tractstyle(feature) {
 			var color = getColorHome(feature.properties[attyear])
 			if(yearSel == 'Change'){
 				var color = getColorHChange(feature.properties[attyear])}}
+		if(attSel == 'Income'){
+			var color = getColorIncome(feature.properties[attyear])
+			if(yearSel == 'Change'){
+				var color = getColorIChange(feature.properties[attyear])}}
 		return {
 			weight: 2,
 			opacity: 1,
@@ -292,6 +322,7 @@ function updateMap(map,att,year){
 					};
 					
 				var color = getColorHome(props[attyear]);
+				
 				if(yearSel == 'Change'){
 						legend.onAdd = function (map) {
 							var legdiv = L.DomUtil.create('div', 'info legend'),
@@ -311,6 +342,48 @@ function updateMap(map,att,year){
 					return legdiv;
 					};
 					var color = getColorHChange(props[attyear]);
+				}}
+				
+				if(attSel == 'Income'){
+					legend.onAdd = function (map) {
+				var legdiv = L.DomUtil.create('div', 'info legend'),
+					grades = [0,14621, 43864, 58485, 73106, 87727, 102348, 116969, 131591, 146212, 160833],
+					labels = [],
+					from, to;
+
+				for (var i = 0; i < grades.length; i++) {
+					from = grades[i];
+					to = grades[i + 1]-1;
+					labels.push(
+						'<i style="background:' + getColorHome(from + 1) + '"></i> ' +
+						 from + (to ? '&ndash;' + to : '+'));
+					}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					
+				var color = getColorIncome(props[attyear]);
+				
+				if(yearSel == 'Change'){
+						legend.onAdd = function (map) {
+							var legdiv = L.DomUtil.create('div', 'info legend'),
+								grades = [-13461,-5787, -488, 4314, 9921, 17213, 27111, 40619, 82381],
+								labels = [],
+								from, to;
+
+							for (var i = 0; i < grades.length; i++) {
+								from = grades[i];
+								to = grades[i + 1]-1;
+								labels.push(
+									'<i style="background:' + getColorHChange(from + 1) + '"></i> ' +
+									from + (to ? '&ndash; ' + to : '+'));
+						}
+
+					legdiv.innerHTML = labels.join('<br>');
+					return legdiv;
+					};
+					var color = getColorIChange(props[attyear]);
 				}}
 				
 				
@@ -355,6 +428,13 @@ $('#yearOpt').change(function(){
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
 			: 'Hover over a state');
 		};}
+		
+		if(attSel == 'Income'){
+			info.update = function (props) {
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
+			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
+			: 'Hover over a state');
+		};}
 		info.remove();
 		info.addTo(map);
 	})
@@ -363,6 +443,7 @@ $('#attOpt').change(function(){
 		attID = document.getElementById('attOpt');
 		attVal = attID.options[attID.selectedIndex].value;
 		updateMap(map,attVal,yearSel);
+		console.log(attyear);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
 		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
@@ -373,6 +454,13 @@ $('#attOpt').change(function(){
 		if(attSel == 'Home'){
 			info.update = function (props) {
 		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
+			: 'Hover over a state');
+		};}
+		
+		if(attSel == 'Income'){
+			info.update = function (props) {
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
 			: 'Hover over a state');
 		};}
