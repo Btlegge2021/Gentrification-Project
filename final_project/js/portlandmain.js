@@ -355,7 +355,7 @@ function updateMap(map,att,year){
 					from = grades[i];
 					to = grades[i + 1]-1;
 					labels.push(
-						'<i style="background:' + getColorHome(from + 1) + '"></i> ' +
+						'<i style="background:' + getColorIncome(from + 1) + '"></i> ' +
 						 from + (to ? '&ndash;' + to : '+'));
 					}
 
@@ -376,7 +376,7 @@ function updateMap(map,att,year){
 								from = grades[i];
 								to = grades[i + 1]-1;
 								labels.push(
-									'<i style="background:' + getColorHChange(from + 1) + '"></i> ' +
+									'<i style="background:' + getColorIChange(from + 1) + '"></i> ' +
 									from + (to ? '&ndash; ' + to : '+'));
 						}
 
