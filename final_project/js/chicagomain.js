@@ -3,7 +3,7 @@ var attSel = 'Bach'
 var yearSel = '2010'
 var attyear = attSel+yearSel
 var data = chicagoTracts;
-var map = L.map('map').setView([41.835954, -87.630993], 10);
+var map = L.map('map').setView([41.835954, -87.630993], 11);
 
 map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
 	
@@ -18,9 +18,9 @@ var info = L.control({position:'bottomright'});
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state')+'</h5>' ;
 	};
 
 	info.addTo(map);
@@ -99,7 +99,7 @@ var attdiv = L.DomUtil.create('div', 'info attDD');
 var yearDD = L.control({position: 'topright'});
 		yearDD.onAdd = function (map) {
 var yeardiv = L.DomUtil.create('div', 'info yearDD');
-	yeardiv.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "Change">Change</option></select>';
+	yeardiv.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "(%) Change">Change</option></select>';
 	yeardiv.firstChild.onmousedown = yeardiv.firstChild.ondblclick = L.DomEvent.stopPropagation;
 		return yeardiv;
 	};
@@ -417,23 +417,23 @@ $('#yearOpt').change(function(){
 		updateMap(map,attSel,yearVal);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state')+'</h5>';
 		};}
 		
 		if(attSel == 'Home'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Income'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		info.remove();
 		info.addTo(map);
@@ -446,23 +446,23 @@ $('#attOpt').change(function(){
 		console.log(attyear);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Home'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Income'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		info.remove();
 		info.addTo(map)
