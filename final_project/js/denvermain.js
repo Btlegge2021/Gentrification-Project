@@ -3,7 +3,7 @@ var attSel = 'Bach'
 var yearSel = '2010'
 var attyear = attSel+yearSel
 var data = denverTracts;
-var map = L.map('map').setView([39.733013, -104.948885], 12);
+var map = L.map('map').setView([39.713363, -104.952016], 12);
 
 map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
 	
