@@ -3,7 +3,7 @@ var attSel = 'Bach'
 var yearSel = '2010'
 var attyear = attSel+yearSel
 var data = denverTracts;
-var map = L.map('map').setView([39.739261, -105.000719], 10);
+var map = L.map('map').setView([39.733013, -104.948885], 12);
 
 map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
 	
@@ -18,9 +18,9 @@ var info = L.control({position:'bottomright'});
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors or above %</h4>' + '<h5>' +  (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 	};
 
 	info.addTo(map);
@@ -417,23 +417,23 @@ $('#yearOpt').change(function(){
 		updateMap(map,attSel,yearVal);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Home'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Income'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		info.remove();
 		info.addTo(map);
@@ -446,23 +446,23 @@ $('#attOpt').change(function(){
 		console.log(attyear);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Home'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Home Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Income'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' +  (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Median Income Value in Dollars</h4>' + '<h5>' + (props ?
 			'<b>'+ '$' + props[attyear] + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state');
+			: 'Hover over a state') +'</h5>';
 		};}
 		info.remove();
 		info.addTo(map)
