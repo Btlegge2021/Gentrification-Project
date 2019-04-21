@@ -26,7 +26,7 @@ a:hover {
 }
 .canvis .info-footer,
 .canvis .info-title,
-.lake-select,
+.gen-select,
 .launch-page-title-wrap,
 .text-center,
 .toggle-btn {
@@ -171,7 +171,7 @@ html input[disabled] {
  cursor:default
 }
 .igld a,
-.lake-layers li,
+.gen-layers li,
 .slider-track,
 .tick {
  cursor:pointer
@@ -480,7 +480,7 @@ input:focus {
  margin:0 auto;
  box-shadow:0 0 40px 1px rgba(17,25,30,.15)
 }
-.launch-page-title-wrap .launch-lake-btns {
+.launch-page-title-wrap .launch-gen-btns {
  margin-top:20px
 }
 .disclaimer {
@@ -716,7 +716,7 @@ input:focus {
  margin-top:0;
  box-sizing:border-box
 }
-.lake-select {
+.gen-select {
  border:none;
  background:#828282;
  background:-moz-linear-gradient(top,#828282 0,#5a5a5a 100%);
@@ -739,30 +739,30 @@ input:focus {
  box-shadow:0 0 5px 1px rgba(17,25,30,.44);
  text-indent:31px
 }
-.lake-layers li a,
+.gen-layers li a,
 .toggle-btn {
  font-size:12px;
  text-decoration:none
 }
-.lake-select option {
+.gen-select option {
  background-color:#fff;
  color:#11191e;
  border:#5cbce8
 }
-.lake-select option:hover {
+.gen-select option:hover {
  background-color:#5cbce8
 }
 @-moz-document url-prefix() {
- .lake-select {
+ .gen-select {
   text-indent:0
  }
 }
-.lake-layers {
+.gen-layers {
  margin:0;
  padding:0;
  line-height:28px
 }
-.lake-layers li {
+.gen-layers li {
  display:block;
  position:relative;
  list-style:none;
@@ -770,11 +770,11 @@ input:focus {
  border-top:1px solid #22313b;
  margin:0
 }
-.lake-layers li a {
+.gen-layers li a {
  padding-left:5px;
  color:#aaa
 }
-.lake-layers li .btn-info {
+.gen-layers li .btn-info {
  position:absolute;
  display:none;
  background-color:rgba(255,255,255,.5);
@@ -800,37 +800,37 @@ input:focus {
  position:relative;
  display:block
 }
-.lake-layers li .btn-info:hover {
+.gen-layers li .btn-info:hover {
  background-color:#11191e
 }
-.lake-layers li .btn-info:hover span {
+.gen-layers li .btn-info:hover span {
  color:#fff
 }
-.lake-layers li .btn-info span {
+.gen-layers li .btn-info span {
  font-weight:300;
  padding:5px 9px;
  color:#11191e;
  border-radius:50%
 }
-.lake-layers li.active [class*=" icon-"],
-.lake-layers li.active [class^=icon-],
-.lake-layers li.active a,
-.lake-layers li:hover [class*=" icon-"],
-.lake-layers li:hover [class^=icon-],
-.lake-layers li:hover a {
+.gen-layers li.active [class*=" icon-"],
+.gen-layers li.active [class^=icon-],
+.gen-layers li.active a,
+.gen-layers li:hover [class*=" icon-"],
+.gen-layers li:hover [class^=icon-],
+.gen-layers li:hover a {
  color:#fff
 }
-.lake-layers li:hover {
+.gen-layers li:hover {
  background-color:rgba(255,255,255,.15);
  -webkit-transition:all .12s ease-in-out;
  -moz-transition:all .12s ease-in-out;
  -ms-transition:all .12s ease-in-out;
  -o-transition:all .12s ease-in-out
 }
-.lake-layers li.active {
+.gen-layers li.active {
  background-color:rgba(255,255,255,.25)
 }
-.lake-layers li.active .btn-info {
+.gen-layers li.active .btn-info {
  display:block;
  opacity:1;
  -webkit-opacity:1;
@@ -2043,18 +2043,18 @@ div[class*=plus] {
  background-color:rgba(90,90,90,.5)
 }
 @font-face {
- font-family:lake-level-viewer;
- src:url(../font/lake-level-viewer.woff?i9x3ts) format('woff');
- src:url(../font/lake-level-viewer.eot?i9x3ts);
- src:url(../font/lake-level-viewer.eot?#iefixi9x3ts) format('embedded-opentype'),
- url(../font/lake-level-viewer.ttf?i9x3ts) format('truetype'),
- url(../font/lake-level-viewer.svg?i9x3ts#lake-level-viewer) format('svg');
+ font-family:gen-level-viewer;
+ src:url(../font/gen-level-viewer.woff?i9x3ts) format('woff');
+ src:url(../font/gen-level-viewer.eot?i9x3ts);
+ src:url(../font/gen-level-viewer.eot?#iefixi9x3ts) format('embedded-opentype'),
+ url(../font/gen-level-viewer.ttf?i9x3ts) format('truetype'),
+ url(../font/gen-level-viewer.svg?i9x3ts#gen-level-viewer) format('svg');
  font-weight:400;
  font-style:normal
 }
 [class*=" icon-"],
 [class^=icon-] {
- font-family:lake-level-viewer;
+ font-family:gen-level-viewer;
  display:block;
  float:left;
  font-size:20px;
@@ -2101,7 +2101,7 @@ div[class*=plus] {
 .icon-download:before {
  content:"\e602"
 }
-.icon-lake-level-change:before {
+.icon-gen-level-change:before {
  content:"\e603"
 }
 .icon-map-confidence:before {
