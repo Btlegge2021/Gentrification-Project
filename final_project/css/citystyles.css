@@ -89,8 +89,22 @@ opacity: 0.7;
 .myheadsubtitle {
     display: inline-block;
     color:#ccc;
-    font-weight:300;
+    font-weight:200;
     padding-left:8px;
 }
 
+.h2{
+    
+    
+}
 
+.othercities {
+    text-align: left;
+    position: absolute;
+    width:100%;
+    z-index: 1;
+    font-family: 'Open Sans', sans-serif;
+    margin:15px 0px;
+    padding-left: 20px;
+
+}
