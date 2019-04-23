@@ -51,7 +51,9 @@ opacity: 0.7;
 	background-color: #ccc;
 }
 
-
+.leaflet-top, .leaflet-right{
+	margin: 40px;
+}
 
 
 
