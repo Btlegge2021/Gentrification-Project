@@ -18,9 +18,9 @@ var info = L.control({position:'bottomright'});
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
+		this._div.innerHTML = '<h4>'+ yearSel + ' Bachelors or above %</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state')+'</h5>' ;
+			: 'Hover over a state') +'</h5>';
 	};
 
 	info.addTo(map);
@@ -28,7 +28,7 @@ var info = L.control({position:'bottomright'});
 var chicagoNHjson = L.geoJson(chicagoNH, {
 		style: nhstyle,
 		onEachFeature: function(feature, marker) {
-			marker.bindPopup('<h4>' + feature.properties.PRI_NEIGH+'</h4>');
+			marker.bindPopup('<h4>' + feature.properties.Name+'</h4>');
 		}
 	});
 	
@@ -39,7 +39,7 @@ var tractjson = new L.geoJson(data, {
 	
 var nhSearch = new L.Control.Search({		
 		layer:chicagoNHjson,
-		propertyName: "PRI_NEIGH",
+		propertyName: "Name",
 		marker: false,
 		moveToLocation: function(latlng, title, map) {
 			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
@@ -99,7 +99,7 @@ var attdiv = L.DomUtil.create('div', 'info attDD');
 var yearDD = L.control({position: 'topright'});
 		yearDD.onAdd = function (map) {
 var yeardiv = L.DomUtil.create('div', 'info yearDD');
-	yeardiv.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "(%) Change">Change</option></select>';
+	yeardiv.innerHTML = '<h4>Select Year</h4><select id="yearOpt"><option value="2010">2010</option><option value="2017">2017</option><option value = "Change">Change</option></select>';
 	yeardiv.firstChild.onmousedown = yeardiv.firstChild.ondblclick = L.DomEvent.stopPropagation;
 		return yeardiv;
 	};
@@ -417,9 +417,9 @@ $('#yearOpt').change(function(){
 		updateMap(map,attSel,yearVal);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
-			: 'Hover over a state')+'</h5>';
+			: 'Hover over a state') +'</h5>';
 		};}
 		
 		if(attSel == 'Home'){
@@ -446,7 +446,7 @@ $('#attOpt').change(function(){
 		console.log(attyear);
 		if(attSel == 'Bach'){
 			info.update = function (props) {
-		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors Degree or above (%)</h4>' + '<h5>' + (props ?
+		this._div.innerHTML = '<h4>'+ yearSel +' Bachelors or above %</h4>' + '<h5>' + (props ?
 			'<b>' + props[attyear] + '%' + '</b><br />' + props.NH +'<br/>'+ props.TractName
 			: 'Hover over a state') +'</h5>';
 		};}
