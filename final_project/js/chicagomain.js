@@ -136,55 +136,55 @@ function getColorBachChange(d) {
 	
 function getColorHome (d) {
 	return  d > 914500  ? '#BF0F00' :
-			d > 568500  ? '#BF065B' :
-			d > 430200  ? '#C00DBF' :
-			d > 355300  ? '#6413C0' :
-			d > 292700  ? '#1A27C1' :
-			d > 248500  ? '#2183C2' :
-			d > 212900  ? '#28C2AB' :
-			d > 176200  ? '#2FC35D' :
-			d > 141500  ? '#56C336' :
-			d > 104700  ? '#A4C43D' :
+			d > 823100  ? '#BF065B' :
+			d > 732000  ? '#C00DBF' :
+			d > 640200  ? '#6413C0' :
+			d > 548700  ? '#1A27C1' :
+			d > 457300  ? '#2183C2' :
+			d > 365800  ? '#28C2AB' :
+			d > 274400  ? '#2FC35D' :
+			d > 18300  ? '#56C336' :
+			d > 91500  ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorHChange(d) {
 	return  d > 290900   ? '#BF0F00' :
-			d > 143600   ? '#C00DBF' :
-			d > 61700    ? '#6413C0' :
-			d > 15600    ? '#1A27C1' :
-			d > -17400   ? '#2183C2' :
-			d > -45000   ? '#28C2AB' :
-			d > -74600   ? '#2FC35D' :
-			d > -111500  ? '#56C336' :
-			d > -162700  ? '#A4C43D' :
+			d > 229000   ? '#C00DBF' :
+			d > 166800   ? '#6413C0' :
+			d > 104800    ? '#1A27C1' :
+			d > 42700   ? '#2183C2' :
+			d > -19300   ? '#28C2AB' :
+			d > -81400   ? '#2FC35D' :
+			d > -143400  ? '#56C336' :
+			d > -205500  ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorIncome (d) {
-	return  d > 160833  ? '#BF0F00' :
-			d > 146212  ? '#BF065B' :
-			d > 131591  ? '#C00DBF' :
-			d > 116969  ? '#6413C0' :
-			d > 102348  ? '#1A27C1' :
-			d > 87727   ? '#2183C2' :
-			d > 73106   ? '#28C2AB' :
-			d > 58485   ? '#2FC35D' :
-			d > 43864   ? '#56C336' :
-			d > 14621   ? '#A4C43D' :
+	return  d > 160800  ? '#BF0F00' :
+			d > 144800  ? '#BF065B' :
+			d > 128700  ? '#C00DBF' :
+			d > 112600  ? '#6413C0' :
+			d > 96500  ? '#1A27C1' :
+			d > 80400   ? '#2183C2' :
+			d > 64300   ? '#28C2AB' :
+			d > 48300   ? '#2FC35D' :
+			d > 32200   ? '#56C336' :
+			d > 16100   ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorIChange(d) {
-	return  d > 82381  ? '#BF0F00' :
-			d > 40619  ? '#C00DBF' :
-			d > 27111  ? '#6413C0' :
-			d > 17213  ? '#1A27C1' :
-			d > 9921   ? '#2183C2' :
-			d > 4314   ? '#28C2AB' :
-			d > -488   ? '#2FC35D' :
-			d > -5787  ? '#56C336' :
-			d > -13461 ? '#A4C43D' :
+	return  d > 82300 ? '#BF0F00' :
+			d > 69200  ? '#C00DBF' :
+			d > 56000  ? '#6413C0' :
+			d > 42900  ? '#1A27C1' :
+			d > 29700  ? '#2183C2' :
+			d > 16500   ? '#28C2AB' :
+			d > 3300   ? '#2FC35D' :
+			d > -9900  ? '#56C336' :
+			d > -23000 ? '#A4C43D' :
 			'#C59E44';
 	}
 //Styles for tracts initialized with Bachelors stats
@@ -305,7 +305,7 @@ function updateMap(map,att,year){
 				if(attSel == 'Home'){
 					legend.onAdd = function (map) {
 				var legdiv = L.DomUtil.create('div', 'info legend'),
-					grades = [0,104700, 141500, 176200, 212900, 248500, 292700, 355300, 430200, 568500, 914500],
+					grades = [0,91500, 18300, 274400, 365800, 457300, 548700, 640200, 732000, 823100, 914500],
 					labels = [],
 					from, to;
 
@@ -326,7 +326,7 @@ function updateMap(map,att,year){
 				if(yearSel == 'Change'){
 						legend.onAdd = function (map) {
 							var legdiv = L.DomUtil.create('div', 'info legend'),
-								grades = [-162700, -111500, -74600, -45000, -17400, 15600, 61700, 143600, 290900],
+								grades = [-205500, -143400, -81400, -19300, 42700, 104800, 166800, 229000, 290900],
 								labels = [],
 								from, to;
 
@@ -347,7 +347,7 @@ function updateMap(map,att,year){
 				if(attSel == 'Income'){
 					legend.onAdd = function (map) {
 				var legdiv = L.DomUtil.create('div', 'info legend'),
-					grades = [0,14621, 43864, 58485, 73106, 87727, 102348, 116969, 131591, 146212, 160833],
+					grades = [0, 16100, 32200, 48300, 64300, 80400, 96500, 112600, 128700, 144800, 160800],
 					labels = [],
 					from, to;
 

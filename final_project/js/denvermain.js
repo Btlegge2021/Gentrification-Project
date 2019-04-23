@@ -135,56 +135,56 @@ function getColorBachChange(d) {
 	}
 	
 function getColorHome (d) {
-	return  d > 914500  ? '#BF0F00' :
-			d > 568500  ? '#BF065B' :
-			d > 430200  ? '#C00DBF' :
-			d > 355300  ? '#6413C0' :
-			d > 292700  ? '#1A27C1' :
-			d > 248500  ? '#2183C2' :
-			d > 212900  ? '#28C2AB' :
-			d > 176200  ? '#2FC35D' :
-			d > 141500  ? '#56C336' :
-			d > 104700  ? '#A4C43D' :
+	return  d > 957500  ? '#BF0F00' :
+			d > 861750  ? '#BF065B' :
+			d > 766000  ? '#C00DBF' :
+			d > 670250  ? '#6413C0' :
+			d > 574500  ? '#1A27C1' :
+			d > 478750  ? '#2183C2' :
+			d > 383000  ? '#28C2AB' :
+			d > 287250  ? '#2FC35D' :
+			d > 191500  ? '#56C336' :
+			d > 95750  ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorHChange(d) {
-	return  d > 290900   ? '#BF0F00' :
-			d > 143600   ? '#C00DBF' :
-			d > 61700    ? '#6413C0' :
-			d > 15600    ? '#1A27C1' :
-			d > -17400   ? '#2183C2' :
-			d > -45000   ? '#28C2AB' :
-			d > -74600   ? '#2FC35D' :
-			d > -111500  ? '#56C336' :
-			d > -162700  ? '#A4C43D' :
+	return  d > 245300   ? '#BF0F00' :
+			d > 207900   ? '#C00DBF' :
+			d > 170600   ? '#6413C0' :
+			d > 133200    ? '#1A27C1' :
+			d > 95900   ? '#2183C2' :
+			d > 58500   ? '#28C2AB' :
+			d > 21200   ? '#2FC35D' :
+			d > -16200  ? '#56C336' :
+			d > -53500  ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorIncome (d) {
-	return  d > 160833  ? '#BF0F00' :
-			d > 146212  ? '#BF065B' :
-			d > 131591  ? '#C00DBF' :
-			d > 116969  ? '#6413C0' :
-			d > 102348  ? '#1A27C1' :
-			d > 87727   ? '#2183C2' :
-			d > 73106   ? '#28C2AB' :
-			d > 58485   ? '#2FC35D' :
-			d > 43864   ? '#56C336' :
-			d > 14621   ? '#A4C43D' :
+	return  d > 179600  ? '#BF0F00' :
+			d > 161700  ? '#BF065B' :
+			d > 143700  ? '#C00DBF' :
+			d > 125800  ? '#6413C0' :
+			d > 107800  ? '#1A27C1' :
+			d > 89800   ? '#2183C2' :
+			d > 71900   ? '#28C2AB' :
+			d > 53900   ? '#2FC35D' :
+			d > 35900   ? '#56C336' :
+			d > 18000   ? '#A4C43D' :
 			'#C59E44';
 	}
 	
 function getColorIChange(d) {
-	return  d > 82381  ? '#BF0F00' :
-			d > 40619  ? '#C00DBF' :
-			d > 27111  ? '#6413C0' :
-			d > 17213  ? '#1A27C1' :
-			d > 9921   ? '#2183C2' :
-			d > 4314   ? '#28C2AB' :
-			d > -488   ? '#2FC35D' :
-			d > -5787  ? '#56C336' :
-			d > -13461 ? '#A4C43D' :
+	return  d > 51750  ? '#BF0F00' :
+			d > 32400  ? '#C00DBF' :
+			d > 13000  ? '#6413C0' :
+			d > -6400  ? '#1A27C1' :
+			d > -25800  ? '#2183C2' :
+			d > -45100   ? '#28C2AB' :
+			d > -64500   ? '#2FC35D' :
+			d > -83900  ? '#56C336' :
+			d > -103300 ? '#A4C43D' :
 			'#C59E44';
 	}
 //Styles for tracts initialized with Bachelors stats
@@ -305,7 +305,7 @@ function updateMap(map,att,year){
 				if(attSel == 'Home'){
 					legend.onAdd = function (map) {
 				var legdiv = L.DomUtil.create('div', 'info legend'),
-					grades = [0,104700, 141500, 176200, 212900, 248500, 292700, 355300, 430200, 568500, 914500],
+					grades = [0, 95750, 191500, 287250, 383000, 478750, 574500, 670250, 766000, 861750, 957500],
 					labels = [],
 					from, to;
 
@@ -326,7 +326,7 @@ function updateMap(map,att,year){
 				if(yearSel == 'Change'){
 						legend.onAdd = function (map) {
 							var legdiv = L.DomUtil.create('div', 'info legend'),
-								grades = [-162700, -111500, -74600, -45000, -17400, 15600, 61700, 143600, 290900],
+								grades = [-53500, -16200, 21200, 58500, 95900, 133200, 170600, 207900, 245300],
 								labels = [],
 								from, to;
 
@@ -347,7 +347,7 @@ function updateMap(map,att,year){
 				if(attSel == 'Income'){
 					legend.onAdd = function (map) {
 				var legdiv = L.DomUtil.create('div', 'info legend'),
-					grades = [0,14621, 43864, 58485, 73106, 87727, 102348, 116969, 131591, 146212, 160833],
+					grades = [0,18000, 35900, 53900, 71900, 89800, 107800, 125800, 143700, 161700, 179600],
 					labels = [],
 					from, to;
 
@@ -368,7 +368,7 @@ function updateMap(map,att,year){
 				if(yearSel == 'Change'){
 						legend.onAdd = function (map) {
 							var legdiv = L.DomUtil.create('div', 'info legend'),
-								grades = [-13461,-5787, -488, 4314, 9921, 17213, 27111, 40619, 82381],
+								grades = [-103300, -83900, -64500, -45100, -25800, -6400, 13000, 32400, 51750],
 								labels = [],
 								from, to;
 
